@@ -5,10 +5,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class ClientHandler implements Runnable{
+public class ServerHandler implements Runnable{
     Socket socket;
 
-    public ClientHandler(Socket socket) {
+    public ServerHandler(Socket socket) {
         this.socket = socket;
     }
 

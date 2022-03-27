@@ -8,7 +8,7 @@ public class Message implements Serializable {
         this.content = content;
     }
 
-    static final long serialVersionUID = 13;
+    static final long serialVersionUID = 13L;
     private int number;
     private String content;
 
