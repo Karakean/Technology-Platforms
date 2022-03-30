@@ -8,27 +8,24 @@ public class Client {
         try (Socket client = new Socket("localhost", 9797)) {
             try(ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
                 ObjectInputStream ois = new ObjectInputStream(client.getInputStream())){
+
                     String response = (String) ois.readObject();
                     if (!response.equals("ready")){
-                        System.out.println("Error: not ready");
+                        System.out.println("Error: server not ready");
                         return;
                     }
+                    int n = Integer.parseInt(args[0]);
+                    oos.writeObject(n);
 
-                    oos.writeObject(5);
-                    response = (String) ois.readObject();
-                    if (!response.equals("ready to receive messages")) {
-                        System.out.println("Error: not ready to receive messages");
-                        return;
-                    }
-
-                    for (int i=0; i<5; i++) {
-                        oos.writeObject(new Message(i,"message"));
+                    for (int i=0; i<n; i++) {
+                        oos.writeObject(new Message(i,"message"+i));
                     }
 
                     response = (String) ois.readObject();
                     if (!response.equals("done")) {
-                        System.out.println("Error");
+                        System.out.println("Error: server didn't respond properly");
                     }
+
                 }
             catch (ClassNotFoundException e) {
                 e.printStackTrace();

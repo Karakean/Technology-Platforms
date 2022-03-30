@@ -5,10 +5,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class ServerHandler implements Runnable{
+public class ClientHandler implements Runnable{
     Socket socket;
 
-    public ServerHandler(Socket socket) {
+    public ClientHandler(Socket socket) {
         this.socket = socket;
     }
 
@@ -18,10 +18,9 @@ public class ServerHandler implements Runnable{
              ObjectInputStream ois = new ObjectInputStream(socket.getInputStream())){
             oos.writeObject("ready");
             Integer n = (Integer) ois.readObject();
-            oos.writeObject("ready to receive messages");
             for (int i=0; i<n; i++){
-                Message input = (Message) ois.readObject();
-                System.out.println(input.getContent());
+                Message message = (Message) ois.readObject();
+                System.out.println(message.getContent());
             }
             oos.writeObject("done");
         }
