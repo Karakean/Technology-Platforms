@@ -1,0 +1,7 @@
+C:\Users\mipig\Desktop\PG\sem 4\pt\C#\ConsoleFileTreeView\ConsoleFileTreeView\bin\Debug\ConsoleFileTreeView.exe.config
+C:\Users\mipig\Desktop\PG\sem 4\pt\C#\ConsoleFileTreeView\ConsoleFileTreeView\bin\Debug\ConsoleFileTreeView.exe
+C:\Users\mipig\Desktop\PG\sem 4\pt\C#\ConsoleFileTreeView\ConsoleFileTreeView\bin\Debug\ConsoleFileTreeView.pdb
+C:\Users\mipig\Desktop\PG\sem 4\pt\C#\ConsoleFileTreeView\ConsoleFileTreeView\obj\Debug\ConsoleFileTreeView.csproj.AssemblyReference.cache
+C:\Users\mipig\Desktop\PG\sem 4\pt\C#\ConsoleFileTreeView\ConsoleFileTreeView\obj\Debug\ConsoleFileTreeView.csproj.CoreCompileInputs.cache
+C:\Users\mipig\Desktop\PG\sem 4\pt\C#\ConsoleFileTreeView\ConsoleFileTreeView\obj\Debug\ConsoleFileTreeView.exe
+C:\Users\mipig\Desktop\PG\sem 4\pt\C#\ConsoleFileTreeView\ConsoleFileTreeView\obj\Debug\ConsoleFileTreeView.pdb
