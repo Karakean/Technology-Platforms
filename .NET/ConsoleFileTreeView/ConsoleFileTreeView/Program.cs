@@ -25,17 +25,16 @@ namespace ConsoleFileTreeView
 				return;
 			}
 			DirectoryInfo directoryInfo = new DirectoryInfo(Args[0]);
-			MyDirectory diskDirectory = new MyDirectory(directoryInfo);
-			diskDirectory.Print();
+			MyDirectory myDirectory = new MyDirectory(directoryInfo);
+			myDirectory.Print(0);
 			Console.WriteLine("\nOldest file: {0}", directoryInfo.GetOldestFile());
-			CreateCollection(Args[0]);
+			MakeCollection(Args[0]);
 			Console.ReadLine();
 		}
 
-		public static void CreateCollection(string path)
+		public static void MakeCollection(string path)
 		{
 			SortedDictionary<string, int> collection = new SortedDictionary<string, int>(new MyComparer());
-
 			if (File.Exists(path))
 			{
 				FileInfo file = new FileInfo(path);
@@ -49,19 +48,17 @@ namespace ConsoleFileTreeView
 				foreach (var file in dir.GetFiles())
 					collection.Add(file.Name, (int)file.Length);
 			}
-
-			FileStream fs = new FileStream("DataFile.dat", FileMode.Create);
-			BinaryFormatter formatter = new BinaryFormatter();
-
+			FileStream fileStream = new FileStream("DataFile.dat", FileMode.Create);
+			BinaryFormatter binaryFormatter = new BinaryFormatter();
 			try
 			{
-				formatter.Serialize(fs, collection);
+				binaryFormatter.Serialize(fileStream, collection);
 			}
-			catch (SerializationException e)
+			catch (SerializationException ex)
 			{
-				Console.WriteLine("Serialization error: {0}", e.Message);
+				Console.WriteLine("Serialization error: {0}", ex.Message);
 			}
-			fs.Close();
+			fileStream.Close();
 			Deserialize();
 		}
 
@@ -69,87 +66,17 @@ namespace ConsoleFileTreeView
 		{
 			SortedDictionary<string, int> collection = new SortedDictionary<string, int>(new MyComparer());
 			FileStream fs = new FileStream("DataFile.dat", FileMode.Open);
-
 			try
 			{
-				BinaryFormatter formatter = new BinaryFormatter();
-				collection = (SortedDictionary<string, int>)formatter.Deserialize(fs);
+				BinaryFormatter bf = new BinaryFormatter();
+				collection = (SortedDictionary<string, int>)bf.Deserialize(fs);
 			}
-			catch (SerializationException e)
+			catch (SerializationException ex)
 			{
-				Console.WriteLine("Serialization error: {0}", e.Message);
+				Console.WriteLine("Serialization error: {0}", ex.Message);
 			}
-
-			foreach (var file in collection)
-				Console.WriteLine("{0} -> {1}", file.Key, file.Value);
+			foreach (var dir in collection)
+				Console.WriteLine("{0} -> {1}", dir.Key, dir.Value);
 		}
 	}
-
-    internal class Comparator : IDictionary<string, int>
-    {
-        public int this[string key] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public ICollection<string> Keys => throw new NotImplementedException();
-
-        public ICollection<int> Values => throw new NotImplementedException();
-
-        public int Count => throw new NotImplementedException();
-
-        public bool IsReadOnly => throw new NotImplementedException();
-
-        public void Add(string key, int value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Add(KeyValuePair<string, int> item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Clear()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Contains(KeyValuePair<string, int> item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool ContainsKey(string key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CopyTo(KeyValuePair<string, int>[] array, int arrayIndex)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerator<KeyValuePair<string, int>> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(string key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(KeyValuePair<string, int> item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool TryGetValue(string key, out int value)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

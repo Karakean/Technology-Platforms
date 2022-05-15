@@ -9,9 +9,8 @@ namespace ConsoleFileTreeView
 {
 	public abstract class MyData
 	{
-		protected FileSystemInfo fileInfo;
+		protected FileSystemInfo info;
 		protected abstract string Format(int recursionDepth);
 		protected internal abstract void Print(int recursionDepth);
-		public void Print() { Print(0); }
 	}
 }

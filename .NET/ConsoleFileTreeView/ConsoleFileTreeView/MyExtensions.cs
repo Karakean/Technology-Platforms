@@ -20,18 +20,18 @@ namespace ConsoleFileTreeView
 
 		public static DateTime GetOldestFile(this DirectoryInfo dir)
 		{
-			DateTime oldest = DateTime.MinValue;
+			DateTime oldest = DateTime.MaxValue;
 			foreach (var info in dir.EnumerateFileSystemInfos())
 			{
 				if (info.GetType() == typeof(DirectoryInfo))
 				{
 					DateTime curr = GetOldestFile(info as DirectoryInfo);
-					if (curr > oldest)
+					if (curr < oldest)
 						oldest = curr;
 				}
 				else if (info.GetType() == typeof(FileInfo))
 				{
-					if (info.CreationTime > oldest)
+					if (info.CreationTime < oldest)
 						oldest = info.CreationTime;
 				}
 			}
