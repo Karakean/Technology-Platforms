@@ -1,0 +1,32 @@
+﻿<Window x:Class="PtLab8.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PtLab8"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Column="0" Width="50" HorizontalAlignment="Left">
+            <MenuItem Header="_File" IsEnabled="True" Click="MenuItem_Click">
+                <MenuItem Header="_Exit" Click="ExitProgram"/>
+                <MenuItem Header="_Open" Click="Open"/>
+                <MenuItem Header="_About" Click="AboutMe"/>
+            </MenuItem>
+        </Menu>
+        <TreeView Grid.Column="1" x:Name="treeView" Width="Auto" AllowDrop="True" SelectedItemChanged="SelectedItenChangeHandle">
+
+        </TreeView>
+        <TextBox x:Name="FileViewer" HorizontalAlignment="Left" Margin="400,0,0,0" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="390" Height="396" RenderTransformOrigin="1.328,0.512" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
+        <StatusBar Grid.Column="2" >
+            <TextBlock Name="rashInfo" Text="" Margin="1,-2,0,0" Width="423" Height="20" />
+        </StatusBar>
+    </Grid>
+
+</Window>
