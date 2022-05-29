@@ -35,17 +35,17 @@ namespace ConsoleFileTreeView
 		public static void MakeCollection(string path)
 		{
 			SortedDictionary<string, int> collection = new SortedDictionary<string, int>(new MyComparer());
-			if (File.Exists(path))
+			if(File.Exists(path))
 			{
 				FileInfo file = new FileInfo(path);
 				collection.Add(file.Name, (int)file.Length);
 			}
-			else if (Directory.Exists(path))
+			else if(Directory.Exists(path))
 			{
 				DirectoryInfo dir = new DirectoryInfo(path);
-				foreach (var subdir in dir.GetDirectories())
+				foreach(var subdir in dir.GetDirectories())
 					collection.Add(subdir.Name, (subdir.GetFiles().Length + subdir.GetDirectories().Length));
-				foreach (var file in dir.GetFiles())
+				foreach(var file in dir.GetFiles())
 					collection.Add(file.Name, (int)file.Length);
 			}
 			FileStream fileStream = new FileStream("DataFile.dat", FileMode.Create);
@@ -54,7 +54,7 @@ namespace ConsoleFileTreeView
 			{
 				binaryFormatter.Serialize(fileStream, collection);
 			}
-			catch (SerializationException ex)
+			catch(SerializationException ex)
 			{
 				Console.WriteLine("Serialization error: {0}", ex.Message);
 			}
@@ -71,11 +71,11 @@ namespace ConsoleFileTreeView
 				BinaryFormatter bf = new BinaryFormatter();
 				collection = (SortedDictionary<string, int>)bf.Deserialize(fs);
 			}
-			catch (SerializationException ex)
+			catch(SerializationException ex)
 			{
 				Console.WriteLine("Serialization error: {0}", ex.Message);
 			}
-			foreach (var dir in collection)
+			foreach(var dir in collection)
 				Console.WriteLine("{0} -> {1}", dir.Key, dir.Value);
 		}
 	}
